@@ -9,20 +9,6 @@ function App() {
   return (
     <div className="min-h-screen relative z-10">
       <BackgroundCanvas />
-      {/* Fixed Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-black/60 backdrop-blur-md border-b border-white/5">
-        <div className="mx-auto max-w-6xl px-8 py-6 flex items-center justify-between">
-          <a href="#top" className="text-sm font-light tracking-wider">JQ</a>
-          <nav className="flex gap-8 text-xs font-light tracking-wide">
-            <a href="#about" className="text-white/50 hover:text-white transition-colors">About</a>
-            <a href="#education" className="text-white/50 hover:text-white transition-colors">Education</a>
-            <a href="#experience" className="text-white/50 hover:text-white transition-colors">Experience</a>
-            <a href="#projects" className="text-white/50 hover:text-white transition-colors">Projects</a>
-            <a href="#blog" className="text-white/50 hover:text-white transition-colors">Writing</a>
-          </nav>
-        </div>
-      </header>
-
       {/* Main Content */}
       <main>
         {/* Hero / About */}
