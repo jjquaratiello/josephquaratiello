@@ -2,7 +2,6 @@ import { useEffect, useRef } from 'react'
 
 export default function BackgroundCanvas() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
-  const mouseRef = useRef({ x: -9999, y: -9999 })
 
   useEffect(() => {
     const canvas = canvasRef.current!
@@ -26,10 +25,7 @@ export default function BackgroundCanvas() {
       ctx.setTransform(state.dpr, 0, 0, state.dpr, 0, 0)
     }
 
-    const onMove = (e: MouseEvent) => {
-      mouseRef.current.x = e.clientX
-      mouseRef.current.y = e.clientY
-    }
+    // mouse handler not used (effect disabled)
 
     resize()
     window.addEventListener('resize', resize)
@@ -50,10 +46,7 @@ export default function BackgroundCanvas() {
       const waveLen = 220 // px
       const waveSpeed = 0.22 // cycles per second (slower)
 
-      // Mouse perturbation
-      const mx = mouseRef.current.x
-      const my = mouseRef.current.y
-      const sigma = 160
+      // Mouse perturbation disabled
 
       // draw grid covering screen with margin
       const startY = -spacingY
@@ -72,13 +65,7 @@ export default function BackgroundCanvas() {
           const phase = (px / waveLen) * Math.PI * 2 + t * Math.PI * 2 * waveSpeed
           py += Math.sin(phase) * waveAmp
 
-          // mouse warp (radial falloff, small displacement)
-          const dx = px - mx
-          const dy = py - my
-          const d2 = dx * dx + dy * dy
-          const falloff = 0 // mouse warp disabled
-
-          // brightness increases near cursor, subtle
+          // brightness
           const alpha = 0.09
 
           ctx.beginPath()
@@ -96,7 +83,7 @@ export default function BackgroundCanvas() {
     return () => {
       cancelAnimationFrame(raf)
       window.removeEventListener('resize', resize)
-      window.removeEventListener('mousemove', onMove)
+      // no mouse listener registered
     }
   }, [])
 

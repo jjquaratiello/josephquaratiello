@@ -9,13 +9,6 @@
   --font-weight-semibold: 600;
 }
 
-:root {
-  /* mouse-controlled custom properties */
-  --mx: 0px;   /* mouse x offset from center (px) */
-  --my: 0px;   /* mouse y offset from center (px) */
-  --mxp: 50%;  /* mouse x in percent for radial center */
-  --myp: 50%;  /* mouse y in percent for radial center */
-}
 
 html {
   scroll-behavior: smooth;
@@ -31,70 +24,6 @@ body {
   letter-spacing: -0.01em;
 }
 
-/* Subtle animated grid background */
-/* Keep CSS-based dots off to avoid double-render; canvas handles dots now */
-/* body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  /* Isometric dot matrix: two staggered radial grids */
-  background-image:
-    radial-gradient(circle at 1px 1px, rgba(255,255,255,0.14) 1.6px, transparent 2.8px),
-    radial-gradient(circle at 1px 1px, rgba(255,255,255,0.10) 1.3px, transparent 2.5px);
-  background-size: 24px 14px, 24px 14px; /* slightly denser lattice */
-  /* parallax position, lightly perturbed by mouse */
-  background-position:
-    calc(0px + var(--mx) * 0.02) calc(0px + var(--my) * 0.02),
-    calc(12px + var(--mx) * -0.02) calc(7px + var(--my) * 0.02);
-  opacity: 0.95;                          /* base strength */
-  filter: drop-shadow(0 0 0 rgba(0,0,0,0));
-  animation: dot-wave 20s ease-in-out infinite, dot-fade 8s ease-in-out infinite;
-  mask-image: radial-gradient(120% 90% at 50% 20%, #fff 60%, transparent 100%);
-} */
-
-/* @keyframes dot-wave {
-  0% {
-    background-position:
-      calc(0px + var(--mx) * 0.02) calc(0px + var(--my) * 0.02),
-      calc(12px + var(--mx) * -0.02) calc(7px + var(--my) * 0.02);
-    background-size: 24px 14px, 24px 14px;
-  }
-  25% {
-    background-position:
-      calc(80px + var(--mx) * 0.02) calc(30px + var(--my) * 0.02),
-      calc(32px + var(--mx) * -0.02) calc(20px + var(--my) * 0.02);
-    background-size: 23px 13px, 25px 15px;
-  }
-  50% {
-    background-position:
-      calc(160px + var(--mx) * 0.02) calc(0px + var(--my) * 0.02),
-      calc(44px + var(--mx) * -0.02) calc(28px + var(--my) * 0.02);
-    background-size: 24px 14px, 24px 14px;
-  }
-  75% {
-    background-position:
-      calc(80px + var(--mx) * 0.02) calc(-30px + var(--my) * 0.02),
-      calc(32px + var(--mx) * -0.02) calc(6px + var(--my) * 0.02);
-    background-size: 25px 15px, 23px 13px;
-  }
-  100% {
-    background-position:
-      calc(0px + var(--mx) * 0.02) calc(0px + var(--my) * 0.02),
-      calc(12px + var(--mx) * -0.02) calc(7px + var(--my) * 0.02);
-    background-size: 24px 14px, 24px 14px;
-  }
-} */
-
-/* @keyframes dot-fade {
-  0%, 100% { opacity: 0.92; }
-  50% { opacity: 1; }
-} */
-
 @media (prefers-reduced-motion: reduce) {
   /* canvas animation will be minimal inside component if needed */
 }
-
-/* Lighten dots near cursor (no glow; actual dots get brighter) */
-/* body::after ... disabled because canvas handles highlight */
