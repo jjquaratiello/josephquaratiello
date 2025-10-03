@@ -25,11 +25,8 @@ export default function BackgroundCanvas() {
       ctx.setTransform(state.dpr, 0, 0, state.dpr, 0, 0)
     }
 
-    // mouse handler not used (effect disabled)
-
     resize()
     window.addEventListener('resize', resize)
-    // Mouse effect disabled; keep listener removed
 
     let raf = 0
     const render = () => {
@@ -46,27 +43,29 @@ export default function BackgroundCanvas() {
       const waveLen = 220 // px
       const waveSpeed = 0.22 // cycles per second (slower)
 
-      // Mouse perturbation disabled
+      // No parallax
+      const parallaxY = 0
+      const parallaxX = 0
 
-      // draw grid covering screen with margin
+      // Start positions snapped to grid so dots align to edges and tile
       const startY = -spacingY
       const endY = state.height + spacingY
       const startX = -spacingX
       const endX = state.width + spacingX
 
-      for (let y = startY, row = 0; y < endY; y += spacingY, row++) {
+      for (let gy = startY, row = 0; gy < endY; gy += spacingY, row++) {
         const offsetX = (row % 2) * (spacingX / 2)
-        for (let x = startX; x < endX; x += spacingX) {
-          // base position
-          let px = x + offsetX
-          let py = y
+        for (let gx = startX; gx < endX; gx += spacingX) {
+          // base tiled position
+          let px = gx + offsetX + parallaxX
+          let py = gy + parallaxY
 
           // wave along isometric direction
           const phase = (px / waveLen) * Math.PI * 2 + t * Math.PI * 2 * waveSpeed
           py += Math.sin(phase) * waveAmp
 
           // brightness
-          const alpha = 0.09
+          const alpha = 0.18
 
           ctx.beginPath()
           ctx.fillStyle = `rgba(255,255,255,${alpha})`
@@ -83,7 +82,6 @@ export default function BackgroundCanvas() {
     return () => {
       cancelAnimationFrame(raf)
       window.removeEventListener('resize', resize)
-      // no mouse listener registered
     }
   }, [])
 
